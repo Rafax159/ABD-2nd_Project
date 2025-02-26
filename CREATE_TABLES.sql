@@ -141,3 +141,13 @@ CREATE TABLE Tipo_Digimon(
 
 CREATE UNIQUE INDEX ind_nombre_tipoDigimon ON Tipo_Digimon (nombre) TABLESPACE repo_indices;
 ALTER TABLE Tipo_Digimon ADD CONSTRAINT nombre_tipoDigimon_pk PRIMARY KEY (nombre);
+
+CREATE TABLE Digievoluciona(
+    digimon_BASE VARCHAR2(30),
+    digimon_EVO VARCHAR2(30),
+    tipo_Evo VARCHAR2(30) UNIQUE,
+    CONSTRAINT digievoluciona_base_fk FOREIGN KEY (digimon_BASE) REFERENCES Digimon (nombre),
+    CONSTRAINT digievoluciona_evo_fk FOREIGN KEY (digimon_EVO) REFERENCES Digimon (nombre)
+)TABLESPACE repo_tablas;
+
+ALTER TABLE Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon_BASE,digimon_EVO);
