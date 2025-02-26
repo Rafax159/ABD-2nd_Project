@@ -40,17 +40,6 @@ ALTER TABLE Entrenador ADD CONSTRAINT id_entrenador_PK PRIMARY KEY (id_entrenado
 
 INSERT INTO ENTRENADOR VALUES (100, 'Luis', 'Garcia', 04129916677, 'luis@ejemplo.com', 'M', '24/01/15', 'Coro', '05/01/22'); -- Dara Error por la edad del entrenador
 
-
-
-
-
-
-
-
-
-
-
-
 CREATE TABLE Digimon(
     nombre VARCHAR2(30) NOT NULL,
     genero VARCHAR2(1) NOT NULL CHECK (genero='M' OR genero='F'),
