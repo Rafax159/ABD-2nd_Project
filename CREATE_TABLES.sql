@@ -1,40 +1,40 @@
 DROP TABLE Pais
 
 CREATE TABLE Pais (
-nombre_ESP VARCHAR2(30) NOT NULL,
-nombre_EN VARCHAR2(30) NOT NULL,
-cod_area NUMBER(10) NOT NULL
+    nombre_ESP VARCHAR2(30) NOT NULL,
+    nombre_EN VARCHAR2(30) NOT NULL,
+    cod_area NUMBER(10) NOT NULL
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX ind_nombre_pais_PK ON Pais(nombre_ESP, nombre_EN) TABLESPACE repo_indices;
-ALTER TABLE Pais ADD CONSTRAINT nombre_pais_PK (nombre_ESP, nombre_EN);
+CREATE UNIQUE INDEX ind_nombre_pais_PK ON Pais(nombre_ESP) TABLESPACE repo_indices;
+ALTER TABLE Pais ADD CONSTRAINT nombre_pais_PK PRIMARY KEY (nombre_ESP);
 
 DROP TABLE Ciudad
 
 CREATE TABLE Ciudad (
-nombre_ESP VARCHAR2(30) NOT NULL,
-nombre_EN VARCHAR2(30) NOT NULL,
-codigo_postal NUMBER(10) NOT NULL,
-pais VARCHAR2(30) NOT NULL,
-CONSTRAINT pais_ciudad_FK FOREIGN KEY (pais) REFERENCES Pais(nombre_ESP)
+    nombre_ESP VARCHAR2(30) NOT NULL,
+    nombre_EN VARCHAR2(30) NOT NULL,
+    codigo_postal NUMBER(10) NOT NULL,
+    pais VARCHAR2(30) NOT NULL,
+    CONSTRAINT pais_ciudad_FK FOREIGN KEY (pais) REFERENCES Pais(nombre_ESP)
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX ind_nombre_ciudad_PK ON Ciudad(nombre_ESP, nombre_EN) TABLESPACE repo_indices;
-ALTER TABLE Ciudad ADD CONSTRAINT nombre_ciudad_PK (nombre_ESP, nombre_EN);
+CREATE UNIQUE INDEX ind_nombre_ciudad_PK ON Ciudad(nombre_ESP) TABLESPACE repo_indices;
+ALTER TABLE Ciudad ADD CONSTRAINT nombre_ciudad_PK PRIMARY KEY (nombre_ESP);
 
 DROP TABLE Entrenador
 
 CREATE TABLE Entrenador (
-id_entrenador NUMBER(10) NOT NULL,
-nombre VARCHAR2(25) NOT NULL,
-apellido VARCHAR2(25) NOT NULL,
-telefono NUMBER(20) NOT NULL,
-email VARCHAR2(30) UNIQUE NOT NULL,
-sexo VARCHAR2(1) NOT NULL CHECK (sexo IN ('M', 'F')),
-fecha_nacimiento DATE NOT NULL CHECK ((2025 - EXTRACT(YEAR FROM (fecha_nacimiento))) >= 18),
-ciudad_origen VARCHAR2(20) NOT NULL,
-fecha_liberacion DATE NOT NULL,
-CONSTRAINT ciudad_origen_FK FOREIGN KEY (ciudad_origen) REFERENCES Ciudad(nombre_ESP)
+    id_entrenador NUMBER(10) NOT NULL,
+    nombre VARCHAR2(25) NOT NULL,
+    apellido VARCHAR2(25) NOT NULL,
+    telefono NUMBER(20) NOT NULL,
+    email VARCHAR2(30) UNIQUE NOT NULL,
+    sexo VARCHAR2(1) NOT NULL CHECK (sexo IN ('M', 'F')),
+    fecha_nacimiento DATE NOT NULL CHECK ((2025 - EXTRACT(YEAR FROM (fecha_nacimiento))) >= 18),
+    ciudad_origen VARCHAR2(30) NOT NULL,
+    fecha_liberacion DATE NOT NULL,
+    CONSTRAINT ciudad_origen_FK FOREIGN KEY (ciudad_origen) REFERENCES Ciudad(nombre_ESP)
 )TABLESPACE repo_tablas;
 
 CREATE UNIQUE INDEX ind_entrenador_PK ON Entrenador(id_entrenador) TABLESPACE repo_indices;
@@ -97,3 +97,36 @@ CREATE TABLE Digievoluciona(
 )TABLESPACE repo_tablas;
 
 ALTER TABLE Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon_BASE,digimon_EVO);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*********************************************************** TRIGGERS ***********************************************************/
+
+
+CREATE OR REPLACE TRIGGER tr_max_digimon_entrenador
+BEFORE INSERT ON Digimon
+FOR EACH ROW
+DECLARE
+    Cantidad_Entrenador NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO Cantidad_Entrenador FROM Digimon WHERE id_entrenador = :NEW.id_entrenador;
+
+    IF Cantidad_Entrenador >= 6 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Un entrenador solo puede tener un maximo');
+    END IF;
+END;
+/
