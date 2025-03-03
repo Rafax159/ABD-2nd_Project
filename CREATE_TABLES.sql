@@ -109,7 +109,7 @@ BEGIN
     SELECT COUNT(*) INTO Cantidad_Entrenador FROM Digimon WHERE id_entrenador = :NEW.id_entrenador;
 
     IF Cantidad_Entrenador >= 6 THEN
-        RAISE_APPLICATION_ERROR(-20001,'Un entrenador solo puede tener un maximo');
+        RAISE_APPLICATION_ERROR(-20001,'Un entrenador solo puede tener un maximo de hasta 6 Digimons');
     END IF;
 END;
 /
