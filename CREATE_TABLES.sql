@@ -6,6 +6,8 @@ CREATE TABLE Pais (
     cod_area NUMBER(10) NOT NULL
 )TABLESPACE repo_tablas;
 
+ALTER TABLE Pais MODIFY cod_area VARCHAR2(10);
+
 CREATE UNIQUE INDEX ind_nombre_pais_PK ON Pais(nombre_ESP) TABLESPACE repo_indices;
 ALTER TABLE Pais ADD CONSTRAINT nombre_pais_PK PRIMARY KEY (nombre_ESP);
 
@@ -22,6 +24,8 @@ CREATE TABLE Ciudad (
 CREATE UNIQUE INDEX ind_nombre_ciudad_PK ON Ciudad(nombre_ESP) TABLESPACE repo_indices;
 ALTER TABLE Ciudad ADD CONSTRAINT nombre_ciudad_PK PRIMARY KEY (nombre_ESP);
 
+ALTER TABLE Ciudad MODIFY codigo_postal VARCHAR2(10);
+
 DROP TABLE Entrenador
 
 CREATE TABLE Entrenador (
@@ -33,7 +37,6 @@ CREATE TABLE Entrenador (
     sexo VARCHAR2(1) NOT NULL CHECK (sexo IN ('M', 'F')),
     fecha_nacimiento DATE NOT NULL CHECK ((2025 - EXTRACT(YEAR FROM (fecha_nacimiento))) >= 18),
     ciudad_origen VARCHAR2(30) NOT NULL,
-    fecha_liberacion DATE NOT NULL,
     CONSTRAINT ciudad_origen_FK FOREIGN KEY (ciudad_origen) REFERENCES Ciudad(nombre_ESP)
 )TABLESPACE repo_tablas;
 
@@ -42,6 +45,8 @@ CREATE INDEX ind_nombre_entrenador ON Entrenador(nombre) TABLESPACE repo_indices
 ALTER TABLE Entrenador ADD CONSTRAINT id_entrenador_PK PRIMARY KEY (id_entrenador);
 
 INSERT INTO ENTRENADOR VALUES (100, 'Luis', 'Garcia', 04129916677, 'luis@ejemplo.com', 'M', '24/01/15', 'Coro', '05/01/22'); -- Dara Error por la edad del entrenador
+
+SELECT SYSDATE + 7 FROM DUAL;
 
 CREATE TABLE Digimon(
     nombre VARCHAR2(30) NOT NULL,
