@@ -92,3 +92,44 @@ INSERT INTO Digievoluciona VALUES
 
 INSERT INTO Digievoluciona VALUES 
     ('Kabuterimon', 'MegaKabuterimon', 'Evolución Perfecta');
+
+INSERT INTO Entrenador (id_entrenador, nombre, apellido, telefono, email, sexo, fecha_nacimiento, ciudad_origen)
+VALUES (1, 'Carlos', 'Ramírez', 5551234567, 'carlos.ramirez@mail.com', 'M', TO_DATE('1985-06-15', 'YYYY-MM-DD'), 'Madrid');
+
+INSERT INTO Entrenador (id_entrenador, nombre, apellido, telefono, email, sexo, fecha_nacimiento, ciudad_origen)
+VALUES (2, 'Laura', 'Fernández', 5559876543, 'laura.fernandez@mail.com', 'F', TO_DATE('1990-09-22', 'YYYY-MM-DD'), 'Barcelona');
+
+INSERT INTO Entrenador (id_entrenador, nombre, apellido, telefono, email, sexo, fecha_nacimiento, ciudad_origen)
+VALUES (3, 'Miguel', 'López', 5557654321, 'miguel.lopez@mail.com', 'M', TO_DATE('1982-03-10', 'YYYY-MM-DD'), 'Valencia');
+
+INSERT INTO Entrenador (id_entrenador, nombre, apellido, telefono, email, sexo, fecha_nacimiento, ciudad_origen)
+VALUES (4, 'Ana', 'García', 5553456789, 'ana.garcia@mail.com', 'F', TO_DATE('2014-12-05', 'YYYY-MM-DD'), 'Sevilla');
+
+INSERT INTO Entrenador (id_entrenador, nombre, apellido, telefono, email, sexo, fecha_nacimiento, ciudad_origen)
+VALUES (5, 'David', 'Martínez', 5552345678, 'david.martinez@mail.com', 'M', TO_DATE('1988-07-19', 'YYYY-MM-DD'), 'Bilbao');
+
+
+
+
+
+CREATE OR REPLACE TRIGGER tr_entrenador_edad
+BEFORE INSERT ON Entrenador
+FOR EACH ROW
+BEGIN
+    IF (EXTRACT(YEAR FROM (SYSDATE)) - EXTRACT(YEAR FROM (:NEW.fecha_nacimiento)) < 18) 
+    THEN
+        RAISE_APPLICATION_ERROR(-20001,'Los Entrenadores deben ser mayor de edad...');
+    END IF;
+END;
+/
+
+SELECT *
+FROM Entrenador;
+
+SELECT SYSDATE
+FROM DUAL;
+
+
+INSERT INTO Pais VALUES ('Venezuela', 'Venezuela', '+58');
+INSERT INTO Ciudad VALUES ('Coro', 'Coro', '4101', 'Venezuela');
+INSERT INTO Entrenador VALUES (001, 'Luis', 'Garcia', 4129916677, 'luis@ejemplo.com', 'M', '24/01/00', 'Coro');

@@ -8,7 +8,7 @@ CREATE UNIQUE INDEX ind_nombre_pais_indx ON Pais(nombre_ESP) TABLESPACE repo_ind
 ALTER TABLE Pais ADD CONSTRAINT nombre_pais_PK PRIMARY KEY (nombre_ESP);
 
 
-CREATE TABLE Ciudad (
+CREATE TABLE Ciudad(
     nombre_ESP VARCHAR2(30) NOT NULL,
     nombre_EN VARCHAR2(30) NOT NULL,
     codigo_postal VARCHAR2(10) NOT NULL,
@@ -27,11 +27,10 @@ CREATE TABLE Entrenador (
     telefono NUMBER(20) NOT NULL,
     email VARCHAR2(30) UNIQUE NOT NULL,
     sexo VARCHAR2(1) NOT NULL CHECK (sexo IN ('M', 'F')),
-    fecha_nacimiento DATE NOT NULL CHECK ((2025 - EXTRACT(YEAR FROM (fecha_nacimiento))) >= 18),
+    fecha_nacimiento DATE NOT NULL,
     ciudad_origen VARCHAR2(20) NOT NULL,
     CONSTRAINT ciudad_origen_FK FOREIGN KEY (ciudad_origen) REFERENCES Ciudad(nombre_ESP)
 )TABLESPACE repo_tablas;
-
 
 CREATE UNIQUE INDEX ind_entrenador_PK ON Entrenador(id_entrenador) TABLESPACE repo_indices;
 CREATE INDEX ind_nombre_entrenador ON Entrenador(nombre) TABLESPACE repo_indices;
@@ -121,8 +120,8 @@ END;
 
 DROP TABLE Pais;
 DROP TABLE Ciudad;
-DROP TABLE Naturaleza;
 DROP TABLE Entrenador;
+DROP TABLE Naturaleza;
 DROP TABLE Digimon;
 DROP TABLE Habilidad_Esp;
 DROP TABLE Tipo_Digimon;
