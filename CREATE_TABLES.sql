@@ -52,7 +52,11 @@ CREATE TABLE Digimon(
     ataque NUMBER(4) NOT NULL CHECK (ataque>=0 AND ataque<=9999),
     ataque_especial NUMBER(4) NOT NULL CHECK (ataque_especial>=0 AND ataque_especial<=9999),
     defensa_especial NUMBER(4) NOT NULL CHECK (defensa_especial>=0 AND defensa_especial<=9999),
-    id_entrenador NUMBER(10) NOT NULL
+    --id_entrenador NUMBER(10) NOT NULL,
+
+    CONSTRAINT digimon_naturaleza_fk FOREIGN KEY (naturaleza) REFERENCES Naturaleza (nombre),
+    CONSTRAINT digimon_habilidadEsp_fk FOREIGN KEY (habilidad_especial) REFERENCES Habilidad_Esp (nombre),
+    CONSTRAINT digimon_tipo_fk FOREIGN KEY (tipo) REFERENCES Tipo_Digimon (nombre)
 )TABLESPACE repo_tablas;
 
 CREATE UNIQUE INDEX nombre_Digimon_indx ON Digimon (nombre) TABLESPACE repo_indices;
@@ -91,9 +95,10 @@ ALTER TABLE Tipo_Digimon ADD CONSTRAINT nombre_tipoDigimon_pk PRIMARY KEY (nombr
 CREATE TABLE Digievoluciona(
     digimon_BASE VARCHAR2(30),
     digimon_EVO VARCHAR2(30),
-    tipo_Evo VARCHAR2(30) UNIQUE,
+    tipo_Evo VARCHAR2(30),
     CONSTRAINT digievoluciona_base_fk FOREIGN KEY (digimon_BASE) REFERENCES Digimon (nombre),
-    CONSTRAINT digievoluciona_evo_fk FOREIGN KEY (digimon_EVO) REFERENCES Digimon (nombre)
+    CONSTRAINT digievoluciona_evo_fk FOREIGN KEY (digimon_EVO) REFERENCES Digimon (nombre),
+    CONSTRAINT uni_tipoEvolucion UNIQUE (digimon_BASE,tipo_Evo)
 )TABLESPACE repo_tablas;
 
 ALTER TABLE Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon_BASE,digimon_EVO);
@@ -116,13 +121,15 @@ END;
 
 --DROP TRIGGER tr_max_digimon_entrenador;
 
-/*DROP TABLE Ciudad;
 DROP TABLE Pais;
+DROP TABLE Ciudad;
 DROP TABLE Naturaleza;
 DROP TABLE Entrenador;
 DROP TABLE Digimon;
 DROP TABLE Habilidad_Esp;
 DROP TABLE Tipo_Digimon;
-DROP TABLE Digievoluciona;*/
+DROP TABLE Digievoluciona;
 
 --INSERT INTO ENTRENADOR VALUES (100, 'Luis', 'Garcia', 04129916677, 'luis@ejemplo.com', 'M', '24/01/15', 'Coro', '05/01/22'); -- Dara Error por la edad del entrenador
+
+
