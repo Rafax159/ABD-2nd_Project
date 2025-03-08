@@ -1,3 +1,17 @@
+/*********** CREACION DEL REPOSITORIO ***************/
+
+CREATE TABLESPACE repo_tablas DATAFILE 'df_tablas_digi.DFB' SIZE 500M;
+CREATE TABLESPACE repo_indices DATAFILE 'df_indices_digi.DFB' SIZE 500M;
+CREATE TABLESPACE usuarios_esquema DATAFILE 'df_usuarios_esq.DFB' SIZE 500M;
+
+--DROP TABLESPACE repo_tablas INCLUDING CONTENTS AND DATAFILES;
+--DROP TABLESPACE repo_indices INCLUDING CONTENTS AND DATAFILES;
+--DROP TABLESPACE usuarios_esquema INCLUDING CONTENTS AND DATAFILES;
+
+
+
+/**************** CREACION DEL ESQUEMA *************/
+
 CREATE TABLE Pais (
     nombre_ESP VARCHAR2(30) NOT NULL,
     nombre_EN VARCHAR2(30) NOT NULL,
@@ -100,6 +114,8 @@ ALTER TABLE Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon
 
 
 --TRIGGER--
+
+
 /* CREATE OR REPLACE TRIGGER tr_max_digimon_entrenador
 BEFORE INSERT ON Digimon
 FOR EACH ROW
