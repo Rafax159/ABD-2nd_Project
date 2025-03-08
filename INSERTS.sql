@@ -36,6 +36,4 @@ INSERT ALL
     INTO Entrenador VALUES (011, 'Emma', 'Schmidt', 3012345678, 'emma@ejemplo.com', 'F', '24/01/00', 'Munich')
 SELECT 1 FROM dual;
 
-DELETE FROM Entrenador;
-
 SELECT * FROM Entrenador;
