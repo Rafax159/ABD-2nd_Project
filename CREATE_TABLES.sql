@@ -116,14 +116,14 @@ END;
 
 --DROP TRIGGER tr_max_digimon_entrenador;
 
-/*DROP TABLE Ciudad;
+/* DROP TABLE Ciudad;
 DROP TABLE Pais;
 DROP TABLE Naturaleza;
 DROP TABLE Entrenador;
 DROP TABLE Digimon;
 DROP TABLE Habilidad_Esp;
 DROP TABLE Tipo_Digimon;
-DROP TABLE Digievoluciona;*/
+DROP TABLE Digievoluciona; */
 
 --INSERT INTO ENTRENADOR VALUES (100, 'Luis', 'Garcia', 04129916677, 'luis@ejemplo.com', 'M', '24/01/15', 'Coro', '05/01/22'); -- Dara Error por la edad del entrenador
 
