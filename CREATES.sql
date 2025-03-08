@@ -1,4 +1,4 @@
-/*********** CREACION DEL REPOSITORIO ***************/
+/**************** CREACION DEL REPOSITORIO ***************/
 
 CREATE TABLESPACE repo_tablas DATAFILE 'df_tablas_digi.DFB' SIZE 500M;
 CREATE TABLESPACE repo_indices DATAFILE 'df_indices_digi.DFB' SIZE 500M;
@@ -10,7 +10,7 @@ CREATE TABLESPACE usuarios_esquema DATAFILE 'df_usuarios_esq.DFB' SIZE 500M;
 
 
 
-/**************** CREACION DEL ESQUEMA *************/
+/**************** CREACION DEL ESQUEMA ******************/
 
 CREATE TABLE Pais (
     nombre_ESP VARCHAR2(30) NOT NULL,
