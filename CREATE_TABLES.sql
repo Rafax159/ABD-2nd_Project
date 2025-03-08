@@ -29,7 +29,6 @@ CREATE TABLE Entrenador (
     sexo VARCHAR2(1) NOT NULL CHECK (sexo IN ('M', 'F')),
     fecha_nacimiento DATE NOT NULL CHECK ((2025 - EXTRACT(YEAR FROM (fecha_nacimiento))) >= 18),
     ciudad_origen VARCHAR2(20) NOT NULL,
-    fecha_liberacion DATE NOT NULL,
     CONSTRAINT ciudad_origen_FK FOREIGN KEY (ciudad_origen) REFERENCES Ciudad(nombre_ESP)
 )TABLESPACE repo_tablas;
 
@@ -52,7 +51,6 @@ CREATE TABLE Digimon(
     ataque NUMBER(4) NOT NULL CHECK (ataque>=0 AND ataque<=9999),
     ataque_especial NUMBER(4) NOT NULL CHECK (ataque_especial>=0 AND ataque_especial<=9999),
     defensa_especial NUMBER(4) NOT NULL CHECK (defensa_especial>=0 AND defensa_especial<=9999),
-    --id_entrenador NUMBER(10) NOT NULL,
 
     CONSTRAINT digimon_naturaleza_fk FOREIGN KEY (naturaleza) REFERENCES Naturaleza (nombre),
     CONSTRAINT digimon_habilidadEsp_fk FOREIGN KEY (habilidad_especial) REFERENCES Habilidad_Esp (nombre),
