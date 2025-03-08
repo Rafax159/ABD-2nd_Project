@@ -27,11 +27,10 @@ CREATE TABLE Entrenador (
     telefono NUMBER(20) NOT NULL,
     email VARCHAR2(30) UNIQUE NOT NULL,
     sexo VARCHAR2(1) NOT NULL CHECK (sexo IN ('M', 'F')),
-    fecha_nacimiento DATE NOT NULL CHECK ((2025 - EXTRACT(YEAR FROM (fecha_nacimiento))) >= 18),
+    fecha_nacimiento DATE NOT NULL,
     ciudad_origen VARCHAR2(20) NOT NULL,
     CONSTRAINT ciudad_origen_FK FOREIGN KEY (ciudad_origen) REFERENCES Ciudad(nombre_ESP)
 )TABLESPACE repo_tablas;
-
 
 CREATE UNIQUE INDEX ind_entrenador_indx ON Entrenador(id_entrenador) TABLESPACE repo_indices;
 CREATE INDEX ind_nombre_entrenador ON Entrenador(nombre) TABLESPACE repo_indices;
@@ -101,7 +100,7 @@ ALTER TABLE Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon
 
 
 --TRIGGER--
-CREATE OR REPLACE TRIGGER tr_max_digimon_entrenador
+/* CREATE OR REPLACE TRIGGER tr_max_digimon_entrenador
 BEFORE INSERT ON Digimon
 FOR EACH ROW
 DECLARE
@@ -113,8 +112,19 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20001,'Un entrenador solo puede tener un maximo de hasta 6 Digimons');
     END IF;
 END;
+/ */
+
+CREATE OR REPLACE TRIGGER tr_entrenador_edad
+BEFORE INSERT ON Entrenador
+FOR EACH ROW
+BEGIN
+    IF (EXTRACT(YEAR FROM (SYSDATE)) - EXTRACT(YEAR FROM (:NEW.fecha_nacimiento)) < 18) THEN
+        RAISE_APPLICATION_ERROR(-20001,'Los Entrenadores deben ser mayor de edad...');
+    END IF;
+END;
 /
 
+--DROP TRIGGER tr_entrenador_edad;
 --DROP TRIGGER tr_max_digimon_entrenador;
 
 /* DROP TABLE Ciudad;
@@ -124,7 +134,6 @@ DROP TABLE Entrenador;
 DROP TABLE Digimon;
 DROP TABLE Habilidad_Esp;
 DROP TABLE Tipo_Digimon;
-DROP TABLE Digievoluciona; */
-
---INSERT INTO ENTRENADOR VALUES (100, 'Luis', 'Garcia', 04129916677, 'luis@ejemplo.com', 'M', '24/01/15', 'Coro', '05/01/22'); -- Dara Error por la edad del entrenador
+DROP TABLE Digievoluciona; 
+*/
 
