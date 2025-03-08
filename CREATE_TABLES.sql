@@ -16,7 +16,7 @@ CREATE TABLE Ciudad (
     CONSTRAINT pais_ciudad_FK FOREIGN KEY (pais) REFERENCES Pais(nombre_ESP)
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX ind_nombre_ciudad_PK ON Ciudad(nombre_ESP) TABLESPACE repo_indices;
+CREATE UNIQUE INDEX ind_nombre_ciudad_indx ON Ciudad(nombre_ESP) TABLESPACE repo_indices;
 ALTER TABLE Ciudad ADD CONSTRAINT nombre_ciudad_PK PRIMARY KEY (nombre_ESP);
 
 
@@ -29,12 +29,11 @@ CREATE TABLE Entrenador (
     sexo VARCHAR2(1) NOT NULL CHECK (sexo IN ('M', 'F')),
     fecha_nacimiento DATE NOT NULL CHECK ((2025 - EXTRACT(YEAR FROM (fecha_nacimiento))) >= 18),
     ciudad_origen VARCHAR2(20) NOT NULL,
-    fecha_liberacion DATE NOT NULL,
     CONSTRAINT ciudad_origen_FK FOREIGN KEY (ciudad_origen) REFERENCES Ciudad(nombre_ESP)
 )TABLESPACE repo_tablas;
 
 
-CREATE UNIQUE INDEX ind_entrenador_PK ON Entrenador(id_entrenador) TABLESPACE repo_indices;
+CREATE UNIQUE INDEX ind_entrenador_indx ON Entrenador(id_entrenador) TABLESPACE repo_indices;
 CREATE INDEX ind_nombre_entrenador ON Entrenador(nombre) TABLESPACE repo_indices;
 ALTER TABLE Entrenador ADD CONSTRAINT id_entrenador_PK PRIMARY KEY (id_entrenador);
 
@@ -52,7 +51,9 @@ CREATE TABLE Digimon(
     ataque NUMBER(4) NOT NULL CHECK (ataque>=0 AND ataque<=9999),
     ataque_especial NUMBER(4) NOT NULL CHECK (ataque_especial>=0 AND ataque_especial<=9999),
     defensa_especial NUMBER(4) NOT NULL CHECK (defensa_especial>=0 AND defensa_especial<=9999),
-    id_entrenador NUMBER(10) NOT NULL
+    CONSTRAINT Digimon_Naturaleza_fk FOREIGN KEY (naturaleza) REFERENCES Naturaleza(nombre),
+    CONSTRAINT Digimon_tipo_fk FOREIGN KEY (tipo) REFERENCES Tipo_Digimon(nombre),
+    CONSTRAINT Digimon_Habilidad_fk FOREIGN KEY (habilidad_especial) REFERENCES Habilidad_Esp(nombre)
 )TABLESPACE repo_tablas;
 
 CREATE UNIQUE INDEX nombre_Digimon_indx ON Digimon (nombre) TABLESPACE repo_indices;
