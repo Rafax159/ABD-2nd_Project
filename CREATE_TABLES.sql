@@ -1,7 +1,7 @@
 CREATE TABLE Pais (
     nombre_ESP VARCHAR2(30) NOT NULL,
     nombre_EN VARCHAR2(30) NOT NULL,
-    cod_area NUMBER(10) NOT NULL
+    cod_area VARCHAR2(10) NOT NULL
 )TABLESPACE repo_tablas;
 
 CREATE UNIQUE INDEX ind_nombre_pais_indx ON Pais(nombre_ESP) TABLESPACE repo_indices;
@@ -11,7 +11,7 @@ ALTER TABLE Pais ADD CONSTRAINT nombre_pais_PK PRIMARY KEY (nombre_ESP);
 CREATE TABLE Ciudad (
     nombre_ESP VARCHAR2(30) NOT NULL,
     nombre_EN VARCHAR2(30) NOT NULL,
-    codigo_postal NUMBER(10) NOT NULL,
+    codigo_postal VARCHAR2(10) NOT NULL,
     pais VARCHAR2(30) NOT NULL,
     CONSTRAINT pais_ciudad_FK FOREIGN KEY (pais) REFERENCES Pais(nombre_ESP)
 )TABLESPACE repo_tablas;
