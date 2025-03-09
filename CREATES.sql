@@ -50,8 +50,6 @@ GRANT CREATE SESSION, Administrador TO Vader;
 
 CONNECT SUPER_USUARIO/12345;
 
-INSERT INTO SUPER_USUARIO.ENTRENADOR VALUES (002, 'Rafael', 'Contreras', 4242550835, 'rafael@ejemplo.com', 'M', '01/08/02', 'Caracas');
-
 /**************** CREACION DEL ESQUEMA ******************/
 
 CREATE TABLE Pais (
