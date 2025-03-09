@@ -63,8 +63,8 @@ ALTER TABLE Digimon ADD CONSTRAINT nombre_digimon_pk PRIMARY KEY (nombre);
 CREATE TABLE Naturaleza(
     nombre VARCHAR(30),
     descripcion VARCHAR2(50),
-    beneficio VARCHAR2(20),
-    desventaja VARCHAR2(20)
+    beneficio VARCHAR2(200),
+    desventaja VARCHAR2(200)
 )TABLESPACE repo_tablas;
 
 CREATE UNIQUE INDEX nombre_Naturaleza_indx ON Naturaleza (nombre) TABLESPACE repo_indices;
@@ -121,6 +121,7 @@ DROP TABLE Digimon;
 DROP TABLE Habilidad_Esp;
 DROP TABLE Tipo_Digimon;
 DROP TABLE Digievoluciona;
+DROP TABLE Entrena;
 
 --INSERT INTO ENTRENADOR VALUES (100, 'Luis', 'Garcia', 04129916677, 'luis@ejemplo.com', 'M', '24/01/15', 'Coro', '05/01/22'); -- Dara Error por la edad del entrenador
 
@@ -140,6 +141,17 @@ BEGIN
         IF v_count >= 6 THEN
             RAISE_APPLICATION_ERROR(-20001, 'Un entrenador no puede tener más de 6 digimones activos.');
         END IF;
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER tr_entrenador_edad
+BEFORE INSERT ON Entrenador
+FOR EACH ROW
+BEGIN
+    IF (EXTRACT(YEAR FROM (SYSDATE)) - EXTRACT(YEAR FROM (:NEW.fecha_nacimiento)) < 18) 
+    THEN
+        RAISE_APPLICATION_ERROR(-20001,'Los Entrenadores deben ser mayor de edad...');
     END IF;
 END;
 /
