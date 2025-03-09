@@ -8,7 +8,49 @@ CREATE TABLESPACE usuarios_esquema DATAFILE 'df_usuarios_esq.DFB' SIZE 500M;
 --DROP TABLESPACE repo_indices INCLUDING CONTENTS AND DATAFILES;
 --DROP TABLESPACE usuarios_esquema INCLUDING CONTENTS AND DATAFILES;
 
+/*********************** USUARIOS Y ROLES ******************************/
 
+ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
+
+CREATE USER Revan IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema;
+CREATE USER Nihilus IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema;
+CREATE USER Vader IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema;
+
+CREATE ROLE Registrador;
+CREATE ROLE Moderador;
+CREATE ROLE Administrador;
+
+GRANT INSERT, UPDATE ON Entrenador TO Registrador;
+GRANT INSERT, UPDATE ON Digimon TO Registrador;
+
+GRANT SELECT ON Pais TO Moderador;
+GRANT SELECT ON Ciudad TO Moderador;
+GRANT SELECT ON Entranador TO Moderador;
+GRANT SELECT ON Digimon TO Moderador;
+GRANT SELECT ON Naturaleza TO Moderador;
+GRANT SELECT ON Habilidad_Esp TO Moderador;
+GRANT SELECT ON Tipo_Digimon TO Moderador;
+GRANT SELECT ON Digievoluciona TO Moderador;
+GRANT SELECT ON Entrena TO Moderador;
+
+GRANT INSERT, UPDATE, DELETE, SELECT ON Pais TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Ciudad TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Entrenador TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Digimon TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Naturaleza TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Habilidad_Esp TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Tipo_Digimon TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Digievoluciona TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Entrena TO Administrador;
+
+GRANT CREATE SESSION, Registrador TO Revan;
+GRANT CREATE SESSION, Moderador TO Nihilus;
+GRANT CREATE SESSION, Administrador TO Vader;
+
+
+CONNECT SUPER_USUARIO/12345;
+
+INSERT INTO SUPER_USUARIO.ENTRENADOR VALUES (002, 'Rafael', 'Contreras', 4242550835, 'rafael@ejemplo.com', 'M', '01/08/02', 'Caracas');
 
 /**************** CREACION DEL ESQUEMA ******************/
 
