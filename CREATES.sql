@@ -152,23 +152,38 @@ CREATE TABLE Digievoluciona(
 
 ALTER TABLE Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon_BASE,digimon_EVO);
 
+CREATE TABLE Entrena(
+    id_entrenador NUMBER(10),
+    nombre_digimon VARCHAR2(30),
+    fecha_liberacion DATE,
+
+    CONSTRAINT entrena_idEnt_fk FOREIGN KEY (id_entrenador) REFERENCES Entrenador (id_entrenador),
+    CONSTRAINT entrena_nombreDigi_fk FOREIGN KEY (nombre_digimon) REFERENCES Digimon (nombre)
+)TABLESPACE repo_tablas;
+
+ALTER TABLE Entrena ADD CONSTRAINT entrena_pk PRIMARY KEY (id_entrenador,nombre_digimon);
 
 --TRIGGER--
 
-
-/* CREATE OR REPLACE TRIGGER tr_max_digimon_entrenador
-BEFORE INSERT ON Digimon
+CREATE OR REPLACE TRIGGER trg_max_digimones
+BEFORE INSERT OR UPDATE ON Entrena
 FOR EACH ROW
 DECLARE
-    Cantidad_Entrenador NUMBER;
+    v_count NUMBER;
 BEGIN
-    SELECT COUNT(*) INTO Cantidad_Entrenador FROM Digimon WHERE id_entrenador = :NEW.id_entrenador;
+    SELECT COUNT(*)
+    INTO v_count
+    FROM Entrena
+    WHERE id_entrenador = :NEW.id_entrenador
+          AND fecha_liberacion IS NULL;
 
-    IF Cantidad_Entrenador >= 6 THEN
-        RAISE_APPLICATION_ERROR(-20001,'Un entrenador solo puede tener un maximo de hasta 6 Digimons');
+    IF :NEW.fecha_liberacion IS NULL THEN
+        IF v_count >= 6 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Un entrenador no puede tener más de 6 digimones activos.');
+        END IF;
     END IF;
 END;
-/ */
+/
 
 CREATE OR REPLACE TRIGGER tr_entrenador_edad
 BEFORE INSERT ON Entrenador
