@@ -25,7 +25,7 @@ GRANT INSERT, UPDATE ON Digimon TO Registrador;
 
 GRANT SELECT ON Pais TO Moderador;
 GRANT SELECT ON Ciudad TO Moderador;
-GRANT SELECT ON Entranador TO Moderador;
+GRANT SELECT ON Entrenador TO Moderador;
 GRANT SELECT ON Digimon TO Moderador;
 GRANT SELECT ON Naturaleza TO Moderador;
 GRANT SELECT ON Habilidad_Esp TO Moderador;
@@ -145,9 +145,10 @@ ALTER TABLE Tipo_Digimon ADD CONSTRAINT nombre_tipoDigimon_pk PRIMARY KEY (nombr
 CREATE TABLE Digievoluciona(
     digimon_BASE VARCHAR2(30),
     digimon_EVO VARCHAR2(30),
-    tipo_Evo VARCHAR2(30) UNIQUE,
+    tipo_Evo VARCHAR2(30),
     CONSTRAINT digievoluciona_base_fk FOREIGN KEY (digimon_BASE) REFERENCES Digimon (nombre),
-    CONSTRAINT digievoluciona_evo_fk FOREIGN KEY (digimon_EVO) REFERENCES Digimon (nombre)
+    CONSTRAINT digievoluciona_evo_fk FOREIGN KEY (digimon_EVO) REFERENCES Digimon (nombre),
+    CONSTRAINT unq_evo_digimon UNIQUE (digimon_BASE, tipo_Evo)
 )TABLESPACE repo_tablas;
 
 ALTER TABLE Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon_BASE,digimon_EVO);
@@ -156,7 +157,6 @@ CREATE TABLE Entrena(
     id_entrenador NUMBER(10),
     nombre_digimon VARCHAR2(30),
     fecha_liberacion DATE,
-
     CONSTRAINT entrena_idEnt_fk FOREIGN KEY (id_entrenador) REFERENCES Entrenador (id_entrenador),
     CONSTRAINT entrena_nombreDigi_fk FOREIGN KEY (nombre_digimon) REFERENCES Digimon (nombre)
 )TABLESPACE repo_tablas;
