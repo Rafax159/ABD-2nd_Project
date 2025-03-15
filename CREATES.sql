@@ -47,6 +47,13 @@ GRANT CREATE SESSION, Registrador TO Revan;
 GRANT CREATE SESSION, Moderador TO Nihilus;
 GRANT CREATE SESSION, Administrador TO Vader;
 
+--DROP USER Revan;
+--DROP USER Nihilus;
+--DROP USER Vader;
+
+--DROP ROLE Registrador;
+--DROP ROLE Moderador;
+--DROP ROLE Administrador;
 
 CONNECT SUPER_USUARIO/12345;
 
@@ -94,7 +101,7 @@ ALTER TABLE Entrenador ADD CONSTRAINT id_entrenador_PK PRIMARY KEY (id_entrenado
 CREATE TABLE Digimon(
     nombre VARCHAR2(30) NOT NULL,
     genero VARCHAR2(1) NOT NULL CHECK (genero='M' OR genero='F'),
-    naturaleza VARCHAR2(20) NOT NULL,
+    naturaleza VARCHAR2(20) NOT NULL CHECK (naturaleza IN ('Vacuna', 'Dato', 'Virus', 'Libre', 'Variable', 'Desconocido')),
     tipo VARCHAR2(20) NOT NULL CHECK (tipo IN ('Agua','Fuego','Viento','Naturaleza','Tierra','Luz','Oscuridad')),
     habilidad_especial VARCHAR2(20) NOT NULL,
     forma VARCHAR2(20) NOT NULL CHECK (forma IN ('In Training','Rookie','Champion','Ultra','Mega','Brust','Armor','Matrix','Spirit')),
@@ -114,7 +121,7 @@ ALTER TABLE Digimon ADD CONSTRAINT nombre_digimon_pk PRIMARY KEY (nombre);
 
 
 CREATE TABLE Naturaleza(
-    nombre VARCHAR(30),
+    nombre VARCHAR(30) NOT NULL CHECK (nombre IN ('Vacuna', 'Dato', 'Virus', 'Libre', 'Variable', 'Desconocido')),
     descripcion VARCHAR2(50),
     beneficio VARCHAR2(20),
     desventaja VARCHAR2(20)
