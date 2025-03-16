@@ -64,7 +64,7 @@ INSERT ALL
     INTO Maul.Habilidad_Esp VALUES ('Disparo Oscuro', 'Proyectil de energía oscura')
 SELECT 1 FROM dual;
 
-SELECT * FROM Mual.Habilidad_Esp;
+SELECT * FROM Maul.Habilidad_Esp;
 
 -- Inserts para Tipo_Digimon
 INSERT ALL
