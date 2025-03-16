@@ -229,13 +229,11 @@ BEGIN
     AND nombre_digimon = :NEW.nombre_digimon;
 
     -- Si existe un registro con la misma PK y la fecha_liberacion está en NULL
-    IF v_count > 0 AND v_fecha IS NULL AND :NEW.fecha_liberacion IS NOT NULL THEN
+    IF v_count > 0 AND v_fecha IS NULL AND (:NEW.fecha_liberacion IS NOT NULL OR :NEW.fecha_liberacion IS NULL) THEN
         -- Eliminar el registro anterior
         DELETE FROM Maul.Entrena
         WHERE id_entrenador = :NEW.id_entrenador
         AND nombre_digimon = :NEW.nombre_digimon;
-
-        -- Insertar el nuevo registro (se permite la inserción)
     END IF;
 END;
 /
