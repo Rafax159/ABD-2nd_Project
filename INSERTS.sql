@@ -1,12 +1,12 @@
---DELETE FROM Maul.Pais;
---DELETE FROM Maul.Ciudad;
---DELETE FROM Maul.Entrenador;
---DELETE FROM Maul.Naturaleza;
---DELETE FROM Maul.Habilidad_Esp;
---DELETE FROM Maul.Tipo_Digimon;
---DELETE FROM Maul.Digimon;
---DELETE FROM Maul.Entrena;
---DELETE FROM Maul.Digievoluciona;
+/*DELETE FROM Maul.Pais;
+DELETE FROM Maul.Ciudad;
+DELETE FROM Maul.Entrenador;
+DELETE FROM Maul.Naturaleza;
+DELETE FROM Maul.Habilidad_Esp;
+DELETE FROM Maul.Tipo_Digimon;
+DELETE FROM Maul.Digimon;
+DELETE FROM Maul.Entrena;
+DELETE FROM Maul.Digievoluciona;*/
 
 -- Inserts para Pais
 INSERT ALL

@@ -248,7 +248,7 @@ END;
 --DROP TRIGGER trg_verifica_entrena;
 
 
-/* DROP TABLE Ciudad;
+/*DROP TABLE Ciudad;
 DROP TABLE Pais;
 DROP TABLE Naturaleza;
 DROP TABLE Entrenador;
@@ -256,5 +256,5 @@ DROP TABLE Digimon;
 DROP TABLE Habilidad_Esp;
 DROP TABLE Tipo_Digimon;
 DROP TABLE Digievoluciona; 
-DROP TABLE Entrena*/
+DROP TABLE Entrena;*/
 
