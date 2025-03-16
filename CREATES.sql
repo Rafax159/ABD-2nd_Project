@@ -156,7 +156,7 @@ ALTER TABLE Maul.Digimon ADD CONSTRAINT nombre_digimon_pk PRIMARY KEY (nombre);
 CREATE TABLE Maul.Digievoluciona(
     digimon_BASE VARCHAR2(30),
     digimon_EVO VARCHAR2(30),
-    tipo_Evo VARCHAR2(30),
+    tipo_Evo VARCHAR2(30) CHECK (tipo_Evo IN ('Entrenamiento', 'Digi-Egg', 'Emocional', 'Oscuridad')),
     CONSTRAINT digievoluciona_base_fk FOREIGN KEY (digimon_BASE) REFERENCES Maul.Digimon (nombre),
     CONSTRAINT digievoluciona_evo_fk FOREIGN KEY (digimon_EVO) REFERENCES Maul.Digimon (nombre),
     CONSTRAINT unq_evo_digimon UNIQUE (digimon_BASE, tipo_Evo)
