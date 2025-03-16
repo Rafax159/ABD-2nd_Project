@@ -15,7 +15,9 @@ ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
 CREATE USER Revan IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema;
 CREATE USER Nihilus IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema;
 CREATE USER Vader IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema;
-CREATE USER Maul IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema; -- > Este usuario es donde se apuntara todo el esquema de la BD
+CREATE USER Maul IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema; 
+ 
+-- El usuario Maul es donde se apuntara todo el esquema de la BD
 
 ALTER USER Maul QUOTA UNLIMITED ON repo_tablas;
 ALTER USER Maul QUOTA UNLIMITED ON repo_indices;
@@ -151,7 +153,7 @@ ALTER TABLE Maul.Entrena ADD CONSTRAINT entrena_pk PRIMARY KEY (id_entrenador,no
 
 /**************** ASIGNACION DE PRIVILEGIOS ****************/
 
-GRANT INSERT, UPDATE, SELECT ON Maul.Entrenador TO Registrador; -- > Para hacer los UPDATE con WHERE
+GRANT INSERT, UPDATE, SELECT ON Maul.Entrenador TO Registrador;
 GRANT INSERT, UPDATE, SELECT ON Maul.Digimon TO Registrador;
 
 GRANT SELECT ON Maul.Pais TO Moderador;

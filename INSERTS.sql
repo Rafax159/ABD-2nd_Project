@@ -17,7 +17,7 @@ INSERT ALL
     INTO Maul.Pais VALUES ('Alemania', 'Germany', '+49')
 SELECT 1 FROM dual;
 
-SELECT * FROM Maul.Pais;
+--SELECT * FROM Maul.Pais;
 
 -- Inserts para Ciudad
 INSERT ALL
@@ -33,7 +33,7 @@ INSERT ALL
     INTO Maul.Ciudad VALUES ('Munich', 'Munich', '80336', 'Alemania')
 SELECT 1 FROM dual;
 
-SELECT * FROM Maul.Ciudad;
+--SELECT * FROM Maul.Ciudad;
 
 -- Inserts para Entrenador
 INSERT ALL
@@ -51,7 +51,7 @@ SELECT 1 FROM dual;
 
 --INSERT INTO Maul.Entrenador VALUES (012, 'Ana', 'Pinto', 4121111111, 'ana@ejemplo.com', 'F', '21/12/00', 'Caracas'); --> Prueba del trigger de edad
 
-SELECT * FROM Maul.Entrenador;
+--SELECT * FROM Maul.Entrenador;
 
 -- Inserts para Naturaleza
 INSERT ALL
@@ -63,7 +63,7 @@ INSERT ALL
     INTO Maul.Naturaleza VALUES ('Desconocido', 'Naturaleza no clasificable', 'Efectos impredecibles', 'Falta de sinergia')
 SELECT 1 FROM dual;
 
-SELECT * FROM Maul.Naturaleza;
+--SELECT * FROM Maul.Naturaleza;
 
 -- Inserts para Habilidad_Esp
 INSERT ALL
@@ -85,7 +85,7 @@ INSERT ALL
     INTO Maul.Habilidad_Esp VALUES ('Rayo Carmesí', 'Rayo de energía oscura destructivo')
 SELECT 1 FROM dual;
 
-SELECT * FROM Maul.Habilidad_Esp;
+--SELECT * FROM Maul.Habilidad_Esp;
 
 -- Inserts para Tipo_Digimon
 INSERT ALL
@@ -98,7 +98,7 @@ INSERT ALL
     INTO Maul.Tipo_Digimon VALUES ('Oscuridad', 'Digimon malignos con habilidades destructivas')
 SELECT 1 FROM dual;
 
-SELECT * FROM Maul.Tipo_Digimon;
+--SELECT * FROM Maul.Tipo_Digimon;
 
 -- Inserts para Digimon
 INSERT ALL
@@ -120,7 +120,7 @@ INSERT ALL
     INTO Maul.Digimon VALUES ('Myotismon', 'M', 'Virus', 'Oscuridad', 'Rayo Carmesí', 'Ultra', 3200, 7100, 2800, 6700, 5800, 6000)
 SELECT 1 FROM dual;
 
-SELECT * FROM Maul.Digimon;
+--SELECT * FROM Maul.Digimon;
 
 -- Inserts para Digievoluciona
 
@@ -132,6 +132,7 @@ INSERT ALL
     INTO Maul.Digievoluciona VALUES ('Devimon', 'Myotismon', 'Oscuridad')
 SELECT 1 FROM dual;
 
+-- SELECT * FROM Maul.Digievoluciona;
 
 -- Inserts para Entrena
 INSERT ALL
@@ -143,4 +144,4 @@ INSERT ALL
     INTO Maul.Entrena VALUES (001, 'MetalGreymon', NULL)
 SELECT 1 FROM dual;
 
-SELECT * FROM Maul.Entrena;
+--SELECT * FROM Maul.Entrena;
