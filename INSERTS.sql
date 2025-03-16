@@ -1,3 +1,13 @@
+--DELETE FROM Maul.Pais;
+--DELETE FROM Maul.Ciudad;
+--DELETE FROM Maul.Entrenador;
+--DELETE FROM Maul.Naturaleza;
+--DELETE FROM Maul.Habilidad_Esp;
+--DELETE FROM Maul.Tipo_Digimon;
+--DELETE FROM Maul.Digimon;
+--DELETE FROM Maul.Entrena;
+
+-- Inserts para Pais
 INSERT ALL
     INTO Maul.Pais VALUES ('Venezuela', 'Venezuela', '+58')
     INTO Maul.Pais VALUES ('Colombia', 'Colombia', '+57')
@@ -8,6 +18,7 @@ SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Pais;
 
+-- Inserts para Ciudad
 INSERT ALL
     INTO Maul.Ciudad VALUES ('Caracas', 'Caracas', '1060', 'Venezuela')
     INTO Maul.Ciudad VALUES ('Coro', 'Coro', '4101', 'Venezuela')
@@ -23,6 +34,7 @@ SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Ciudad;
 
+-- Inserts para Entrenador
 INSERT ALL
     INTO Maul.Entrenador VALUES (001, 'Luis', 'Garcia', 4129916677, 'luis@ejemplo.com', 'M', '24/01/00', 'Coro')
     INTO Maul.Entrenador VALUES (002, 'Rafael', 'Contreras', 4242550835, 'rafael@ejemplo.com', 'M', '01/08/02', 'Caracas')
@@ -35,6 +47,8 @@ INSERT ALL
     INTO Maul.Entrenador VALUES (010, 'Hans', 'Müller', 1711234567, 'hans@ejemplo.com', 'M', '24/01/00', 'Berlin')
     INTO Maul.Entrenador VALUES (011, 'Emma', 'Schmidt', 3012345678, 'emma@ejemplo.com', 'F', '24/01/00', 'Munich')
 SELECT 1 FROM dual;
+
+--INSERT INTO Maul.Entrenador VALUES (012, 'Ana', 'Pinto', 4121111111, 'ana@ejemplo.com', 'F', '21/12/00', 'Caracas'); --> Prueba del trigger de edad
 
 SELECT * FROM Maul.Entrenador;
 
@@ -79,6 +93,7 @@ SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Tipo_Digimon;
 
+-- Inserts para Digimon
 INSERT ALL
     INTO Maul.Digimon VALUES ('Agumon', 'M', 'Vacuna', 'Fuego', 'Llamarada', 'Rookie', 1200, 3500, 1500, 3000, 2800, 2000)
     INTO Maul.Digimon VALUES ('Gabumon', 'M', 'Vacuna', 'Fuego', 'Llama Azul', 'Rookie', 1100, 3400, 1400, 2900, 2700, 1900)
@@ -93,18 +108,15 @@ SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Digimon;
 
--- Suponiendo que existen entrenadores con id_entrenador del 1 al 5
-
+-- Inserts para Entrena
 INSERT ALL
     INTO Maul.Entrena VALUES (001, 'Agumon', NULL)
     INTO Maul.Entrena VALUES (001, 'Gabumon', NULL)
     INTO Maul.Entrena VALUES (001, 'Palmon', NULL)
     INTO Maul.Entrena VALUES (001, 'Patamon', NULL)
     INTO Maul.Entrena VALUES (001, 'Gatomon', NULL)
-    INTO Maul.Entrena VALUES (001, 'Devimon', NULL)
-    INTO Maul.Entrena VALUES (004, 'MetalGreymon', '03/03/2025')
-    INTO Maul.Entrena VALUES (005, 'SaberLeomon', '08/03/2025')
-    INTO Maul.Entrena VALUES (005, 'Beelzemon', '10/03/2025')
+    INTO Maul.Entrena VALUES (001, 'MetalGreymon', NULL)
 SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Entrena;
+
