@@ -215,7 +215,7 @@ END;
 -- Validacion de entrena y liberarion
 
 CREATE OR REPLACE TRIGGER trg_verifica_entrena
-BEFORE INSERT ON Entrena
+BEFORE INSERT ON Maul.Entrena
 FOR EACH ROW
 DECLARE
     v_count NUMBER;
@@ -224,18 +224,16 @@ BEGIN
     -- Verificar si ya existe la clave primaria en la tabla
     SELECT COUNT(*), MAX(fecha_liberacion)
     INTO v_count, v_fecha
-    FROM Entrena
+    FROM Maul.Entrena
     WHERE id_entrenador = :NEW.id_entrenador
     AND nombre_digimon = :NEW.nombre_digimon;
 
     -- Si existe un registro con la misma PK y la fecha_liberacion está en NULL
-    IF v_count > 0 AND v_fecha IS NULL AND :NEW.fecha_liberacion IS NOT NULL THEN
+    IF v_count > 0 AND v_fecha IS NULL AND (:NEW.fecha_liberacion IS NOT NULL OR :NEW.fecha_liberacion IS NULL) THEN
         -- Eliminar el registro anterior
-        DELETE FROM Entrena
+        DELETE FROM Maul.Entrena
         WHERE id_entrenador = :NEW.id_entrenador
         AND nombre_digimon = :NEW.nombre_digimon;
-
-        -- Insertar el nuevo registro (se permite la inserción)
     END IF;
 END;
 /
@@ -253,5 +251,5 @@ DROP TABLE Digimon;
 DROP TABLE Habilidad_Esp;
 DROP TABLE Tipo_Digimon;
 DROP TABLE Digievoluciona; 
-*/
+DROP TABLE Entrena*/
 

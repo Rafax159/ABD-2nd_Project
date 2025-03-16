@@ -140,4 +140,3 @@ INSERT ALL
 SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Entrena;
-
