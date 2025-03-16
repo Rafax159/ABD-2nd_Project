@@ -40,15 +40,14 @@ SELECT * FROM Maul.Entrenador;
 
 INSERT ALL
     INTO Maul.Digimon VALUES ('Agumon', 'M', 'Vacuna', 'Fuego', 'Llamarada', 'Rookie', 1200, 3500, 1500, 3000, 2800, 2000)
-    INTO Maul.Digimon VALUES ('Gabumon', 'M', 'Leal', 'Fuego', 'Llama Azul', 'Rookie', 1100, 3400, 1400, 2900, 2700, 1900)
-    INTO Maul.Digimon VALUES ('Palmon', 'F', 'Alegre', 'Naturaleza', 'Enredadera', 'Rookie', 1000, 3300, 1300, 2800, 2600, 1800)
-    INTO Maul.Digimon VALUES ('Patamon', 'M', 'Dulce', 'Viento', 'Aire Divino', 'Rookie', 1050, 3200, 1350, 2750, 2650, 1750)
-    INTO Maul.Digimon VALUES ('Gatomon', 'F', 'Fuerte', 'Luz', 'Golpe Divino', 'Champion', 1300, 4000, 1800, 3500, 3300, 2500)
-    INTO Maul.Digimon VALUES ('Devimon', 'M', 'Malvado', 'Oscuridad', 'Garra Infernal', 'Champion', 1400, 4200, 1900, 3600, 3400, 2600)
-    INTO Maul.Digimon VALUES ('Garurumon', 'M', 'Leal', 'Viento', 'Colmillo Helado', 'Champion', 1450, 4300, 2000, 3700, 3500, 2700)
-    INTO Maul.Digimon VALUES ('MetalGreymon', 'M', 'Valiente', 'Fuego', 'Misil Giga', 'Ultra', 1500, 5000, 2500, 4500, 4300, 3500)
-    INTO Maul.Digimon VALUES ('SaberLeomon', 'M', 'Salvaje', 'Tierra', 'Rugido Letal', 'Mega', 1600, 5500, 2700, 4800, 4600, 3700)
-    INTO Maul.Digimon VALUES ('Beelzemon', 'M', 'Rebelde', 'Oscuridad', 'Disparo Oscuro', 'Mega', 1700, 5800, 2900, 5000, 4800, 3900)
+    INTO Maul.Digimon VALUES ('Gabumon', 'M', 'Vacuna', 'Fuego', 'Llama Azul', 'Rookie', 1100, 3400, 1400, 2900, 2700, 1900)
+    INTO Maul.Digimon VALUES ('Palmon', 'F', 'Dato', 'Naturaleza', 'Enredadera', 'Rookie', 1000, 3300, 1300, 2800, 2600, 1800)
+    INTO Maul.Digimon VALUES ('Patamon', 'M', 'Libre', 'Viento', 'Aire Divino', 'Rookie', 1050, 3200, 1350, 2750, 2650, 1750)
+    INTO Maul.Digimon VALUES ('Gatomon', 'F', 'Vacuna', 'Luz', 'Garra Infernal', 'Champion', 1300, 4000, 1800, 3500, 3300, 2500)
+    INTO Maul.Digimon VALUES ('Devimon', 'M', 'Virus', 'Oscuridad', 'Colmillo Helado', 'Champion', 1400, 4200, 1900, 3600, 3400, 2600)
+    INTO Maul.Digimon VALUES ('Garurumon', 'M', 'Dato', 'Viento', 'Misil Giga', 'Champion', 1450, 4300, 2000, 3700, 3500, 2700)
+    INTO Maul.Digimon VALUES ('MetalGreymon', 'M', 'Virus', 'Fuego', 'Rugido Letal', 'Ultra', 1500, 5000, 2500, 4500, 4300, 3500)
+    INTO Maul.Digimon VALUES ('SaberLeomon', 'M', 'Vacuna', 'Tierra', 'Disparo Oscuro', 'Mega', 1600, 5500, 2700, 4800, 4600, 3700)
 SELECT 1 FROM dual;
 
 
