@@ -1,11 +1,12 @@
---DELETE FROM Maul.Pais;
---DELETE FROM Maul.Ciudad;
---DELETE FROM Maul.Entrenador;
---DELETE FROM Maul.Naturaleza;
---DELETE FROM Maul.Habilidad_Esp;
---DELETE FROM Maul.Tipo_Digimon;
---DELETE FROM Maul.Digimon;
---DELETE FROM Maul.Entrena;
+DELETE FROM Maul.Pais;
+DELETE FROM Maul.Ciudad;
+DELETE FROM Maul.Entrenador;
+DELETE FROM Maul.Naturaleza;
+DELETE FROM Maul.Habilidad_Esp;
+DELETE FROM Maul.Tipo_Digimon;
+DELETE FROM Maul.Digimon;
+DELETE FROM Maul.Entrena;
+DELETE FROM Maul.Digievoluciona;
 
 -- Inserts para Pais
 INSERT ALL
@@ -81,6 +82,7 @@ INSERT ALL
     INTO Maul.Habilidad_Esp VALUES ('Puño Dinámico', 'Golpe potente con efecto sísmico')
     INTO Maul.Habilidad_Esp VALUES ('Pétalo Mortal', 'Tormenta de pétalos venenosos afilados')
     INTO Maul.Habilidad_Esp VALUES ('Espinas Venus', 'Espinas afiladas con veneno paralizante')
+    INTO Maul.Habilidad_Esp VALUES ('Rayo Carmesí', 'Rayo de energía oscura destructivo')
 SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Habilidad_Esp;
@@ -115,6 +117,7 @@ INSERT ALL
     INTO Maul.Digimon VALUES ('Togemon', 'F', 'Dato', 'Naturaleza', 'Puño Dinámico', 'Champion', 1500, 4000, 1800, 3500, 3200, 2800)
     INTO Maul.Digimon VALUES ('Lilymon', 'F', 'Dato', 'Naturaleza', 'Pétalo Mortal', 'Ultra', 2100, 5400, 2400, 4800, 4400, 4000)
     INTO Maul.Digimon VALUES ('Rosemon', 'F', 'Dato', 'Naturaleza', 'Espinas Venus', 'Mega', 2900, 6700, 3100, 6100, 5700, 5200)
+    INTO Maul.Digimon VALUES ('Myotismon', 'M', 'Virus', 'Oscuridad', 'Rayo Carmesí', 'Ultra', 3200, 7100, 2800, 6700, 5800, 6000)
 SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Digimon;
@@ -126,6 +129,7 @@ INSERT ALL
     INTO Maul.Digievoluciona VALUES ('Gabumon', 'Garurumon', 'Emocional')
     INTO Maul.Digievoluciona VALUES ('Palmon', 'Togemon', 'Emocional')
     INTO Maul.Digievoluciona VALUES ('Patamon', 'Devimon', 'Oscuridad')
+    INTO Maul.Digievoluciona VALUES ('Devimon', 'Myotismon', 'Oscuridad')
 SELECT 1 FROM dual;
 
 
