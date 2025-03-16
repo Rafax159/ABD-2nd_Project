@@ -70,12 +70,17 @@ INSERT ALL
     INTO Maul.Habilidad_Esp VALUES ('Llama Azul', 'Llamas azules con gran poder destructivo')
     INTO Maul.Habilidad_Esp VALUES ('Enredadera', 'Ataque que atrapa al enemigo')
     INTO Maul.Habilidad_Esp VALUES ('Aire Divino', 'Golpe de viento sagrado')
-    INTO Maul.Habilidad_Esp VALUES ('Golpe Divino', 'Ataque poderoso con luz sagrada')
     INTO Maul.Habilidad_Esp VALUES ('Garra Infernal', 'Ataque de energía oscura y maligna')
     INTO Maul.Habilidad_Esp VALUES ('Colmillo Helado', 'Mordida congelante que inmoviliza')
     INTO Maul.Habilidad_Esp VALUES ('Misil Giga', 'Misiles potentes con gran impacto')
     INTO Maul.Habilidad_Esp VALUES ('Rugido Letal', 'Un rugido que paraliza al enemigo')
     INTO Maul.Habilidad_Esp VALUES ('Disparo Oscuro', 'Proyectil de energía oscura')
+    INTO Maul.Habilidad_Esp VALUES ('Mega Llama', 'Llamarada intensa que derrite materiales')
+    INTO Maul.Habilidad_Esp VALUES ('Garra Dramática', 'Ataque definitivo con garras energéticas')
+    INTO Maul.Habilidad_Esp VALUES ('Cañón Cero', 'Disparo de energía a temperatura cero absoluta')
+    INTO Maul.Habilidad_Esp VALUES ('Puño Dinámico', 'Golpe potente con efecto sísmico')
+    INTO Maul.Habilidad_Esp VALUES ('Pétalo Mortal', 'Tormenta de pétalos venenosos afilados')
+    INTO Maul.Habilidad_Esp VALUES ('Espinas Venus', 'Espinas afiladas con veneno paralizante')
 SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Habilidad_Esp;
@@ -104,9 +109,25 @@ INSERT ALL
     INTO Maul.Digimon VALUES ('Garurumon', 'M', 'Dato', 'Viento', 'Misil Giga', 'Champion', 1450, 4300, 2000, 3700, 3500, 2700)
     INTO Maul.Digimon VALUES ('MetalGreymon', 'M', 'Virus', 'Fuego', 'Rugido Letal', 'Ultra', 1500, 5000, 2500, 4500, 4300, 3500)
     INTO Maul.Digimon VALUES ('SaberLeomon', 'M', 'Vacuna', 'Tierra', 'Disparo Oscuro', 'Mega', 1600, 5500, 2700, 4800, 4600, 3700)
+    INTO Maul.Digimon VALUES ('Greymon', 'M', 'Vacuna', 'Fuego', 'Mega Llama', 'Champion', 1800, 4800, 2200, 4200, 3800, 3200)
+    INTO Maul.Digimon VALUES ('WarGreymon', 'M', 'Vacuna', 'Fuego', 'Garra Dramática', 'Mega', 3200, 7500, 3500, 6800, 6200, 5800)
+    INTO Maul.Digimon VALUES ('MetalGarurumon', 'M', 'Vacuna', 'Agua', 'Cañón Cero', 'Mega', 3100, 7300, 3400, 6600, 6100, 5600)
+    INTO Maul.Digimon VALUES ('Togemon', 'F', 'Dato', 'Naturaleza', 'Puño Dinámico', 'Champion', 1500, 4000, 1800, 3500, 3200, 2800)
+    INTO Maul.Digimon VALUES ('Lilymon', 'F', 'Dato', 'Naturaleza', 'Pétalo Mortal', 'Ultra', 2100, 5400, 2400, 4800, 4400, 4000)
+    INTO Maul.Digimon VALUES ('Rosemon', 'F', 'Dato', 'Naturaleza', 'Espinas Venus', 'Mega', 2900, 6700, 3100, 6100, 5700, 5200)
 SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Digimon;
+
+-- Inserts para Digievoluciona
+
+INSERT ALL
+    INTO Maul.Digievoluciona VALUES ('Agumon', 'Greymon', 'Emocional')
+    INTO Maul.Digievoluciona VALUES ('Gabumon', 'Garurumon', 'Emocional')
+    INTO Maul.Digievoluciona VALUES ('Palmon', 'Togemon', 'Emocional')
+    INTO Maul.Digievoluciona VALUES ('Patamon', 'Devimon', 'Oscuridad')
+SELECT 1 FROM dual;
+
 
 -- Inserts para Entrena
 INSERT ALL
