@@ -95,7 +95,6 @@ INSERT ALL
     INTO Maul.Entrena VALUES (001, 'Patamon', NULL)
     INTO Maul.Entrena VALUES (001, 'Gatomon', NULL)
     INTO Maul.Entrena VALUES (001, 'Devimon', NULL)
-    INTO Maul.Entrena VALUES (001, 'Garurumon', '24/01/2025')
     INTO Maul.Entrena VALUES (4, 'MetalGreymon', '03/03/2025')
     INTO Maul.Entrena VALUES (5, 'SaberLeomon', '08/03/2025')
     INTO Maul.Entrena VALUES (5, 'Beelzemon', '10/03/2025')

@@ -19,12 +19,13 @@ CREATE USER Maul IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema; -- > E
 
 ALTER USER Maul QUOTA UNLIMITED ON repo_tablas;
 ALTER USER Maul QUOTA UNLIMITED ON repo_indices;
+ALTER USER Maul QUOTA UNLIMITED ON usuarios_esquema;
 
 CREATE ROLE Registrador;
 CREATE ROLE Moderador;
 CREATE ROLE Administrador;
 
-GRANT INSERT, UPDATE, SELECT ON Maul.Entrenador TO Registrador;
+GRANT INSERT, UPDATE, SELECT ON Maul.Entrenador TO Registrador; -- > Para hacer los UPDATE con WHERE
 GRANT INSERT, UPDATE, SELECT ON Maul.Digimon TO Registrador;
 
 GRANT SELECT ON Maul.Pais TO Moderador;
@@ -126,9 +127,13 @@ ALTER TABLE Maul.Digimon ADD CONSTRAINT nombre_digimon_pk PRIMARY KEY (nombre);
 CREATE TABLE Maul.Naturaleza(
     nombre VARCHAR(30) NOT NULL CHECK (nombre IN ('Vacuna', 'Dato', 'Virus', 'Libre', 'Variable', 'Desconocido')),
     descripcion VARCHAR2(50),
-    beneficio VARCHAR2(20),
-    desventaja VARCHAR2(20)
+    beneficio VARCHAR2(25),
+    desventaja VARCHAR2(25)
 )TABLESPACE repo_tablas;
+
+ALTER TABLE Maul.Naturaleza MODIFY (beneficio VARCHAR2(30));
+ALTER TABLE Maul.Naturaleza MODIFY (desventaja VARCHAR2(30));
+
 
 CREATE UNIQUE INDEX Maul.nombre_Naturaleza_indx ON Maul.Naturaleza (nombre) TABLESPACE repo_indices;
 ALTER TABLE Maul.Naturaleza ADD CONSTRAINT nombre_naturaleza_pk PRIMARY KEY (nombre);
@@ -175,6 +180,8 @@ ALTER TABLE Maul.Entrena ADD CONSTRAINT entrena_pk PRIMARY KEY (id_entrenador,no
 
 --TRIGGER--
 
+-- Maximo de Digimon
+
 CREATE OR REPLACE TRIGGER trg_max_digimones
 BEFORE INSERT OR UPDATE ON Maul.Entrena
 FOR EACH ROW
@@ -188,12 +195,14 @@ BEGIN
           AND fecha_liberacion IS NULL;
 
     IF :NEW.fecha_liberacion IS NULL THEN
-        IF v_count >= 6 THEN
+        IF v_count > 6 THEN
             RAISE_APPLICATION_ERROR(-20001, 'Un entrenador no puede tener más de 6 digimones activos.');
         END IF;
     END IF;
 END;
 /
+
+-- Validacion de Edad
 
 CREATE OR REPLACE TRIGGER tr_entrenador_edad
 BEFORE INSERT ON Maul.Entrenador
@@ -201,6 +210,34 @@ FOR EACH ROW
 BEGIN
     IF (EXTRACT(YEAR FROM (SYSDATE)) - EXTRACT(YEAR FROM (:NEW.fecha_nacimiento)) < 18) THEN
         RAISE_APPLICATION_ERROR(-20001,'Los Entrenadores deben ser mayor de edad...');
+    END IF;
+END;
+/
+
+-- Validacion de entrena y liberarion
+
+CREATE OR REPLACE TRIGGER trg_verifica_entrena
+BEFORE INSERT ON Entrena
+FOR EACH ROW
+DECLARE
+    v_count NUMBER;
+    v_fecha DATE;
+BEGIN
+    -- Verificar si ya existe la clave primaria en la tabla
+    SELECT COUNT(*), MAX(fecha_liberacion)
+    INTO v_count, v_fecha
+    FROM Entrena
+    WHERE id_entrenador = :NEW.id_entrenador
+    AND nombre_digimon = :NEW.nombre_digimon;
+
+    -- Si existe un registro con la misma PK y la fecha_liberacion está en NULL
+    IF v_count > 0 AND v_fecha IS NULL AND :NEW.fecha_liberacion IS NOT NULL THEN
+        -- Eliminar el registro anterior
+        DELETE FROM Entrena
+        WHERE id_entrenador = :NEW.id_entrenador
+        AND nombre_digimon = :NEW.nombre_digimon;
+
+        -- Insertar el nuevo registro (se permite la inserción)
     END IF;
 END;
 /
