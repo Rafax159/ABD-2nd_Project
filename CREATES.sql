@@ -193,7 +193,7 @@ BEGIN
           AND fecha_liberacion IS NULL;
 
     IF :NEW.fecha_liberacion IS NULL THEN
-        IF v_count >= 6 THEN
+        IF v_count > 6 THEN
             RAISE_APPLICATION_ERROR(-20001, 'Un entrenador no puede tener más de 6 digimones activos.');
         END IF;
     END IF;
