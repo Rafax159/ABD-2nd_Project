@@ -49,8 +49,6 @@ INSERT ALL
     INTO Maul.Entrenador VALUES (011, 'Emma', 'Schmidt', 3012345678, 'emma@ejemplo.com', 'F', '24/01/00', 'Munich')
 SELECT 1 FROM dual;
 
---INSERT INTO Maul.Entrenador VALUES (012, 'Ana', 'Pinto', 4121111111, 'ana@ejemplo.com', 'F', '21/12/00', 'Caracas'); --> Prueba del trigger de edad
-
 --SELECT * FROM Maul.Entrenador;
 
 -- Inserts para Naturaleza
@@ -145,3 +143,20 @@ INSERT ALL
 SELECT 1 FROM dual;
 
 --SELECT * FROM Maul.Entrena;
+
+
+/****************** CASOS DE PRUEBA PARA TRIGGERS *****************/
+
+/*
+
+-- Para el trigger de la edad de los entrenadores.
+INSERT INTO Maul.Entrenador VALUES (012, 'Ana', 'Pinto', 4121111111, 'ana@ejemplo.com', 'F', '21/12/10', 'Caracas');
+
+-- Para el trigger de maximo 6 digimones por entrenador, con este insert daria error ya que se insertaron 6 digimones a este entrenador.
+INSERT INTO Maul.Entrena VALUES (001, 'Devimon', NULL);
+
+-- Para liberar un Digimon se le detalla la fecha de liberacion, al insertar esta tupla se eliminara la tupla
+-- que coincida con las primeras dos columnas y se insertara la que tenga la fecha de liberacion.
+INSERT INTO Maul.Entrena VALUES (001, 'Agumon', '16/03/25');
+
+*/
