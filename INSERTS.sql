@@ -38,19 +38,6 @@ SELECT 1 FROM dual;
 
 SELECT * FROM Maul.Entrenador;
 
-INSERT ALL
-    INTO Maul.Digimon VALUES ('Agumon', 'M', 'Vacuna', 'Fuego', 'Llamarada', 'Rookie', 1200, 3500, 1500, 3000, 2800, 2000)
-    INTO Maul.Digimon VALUES ('Gabumon', 'M', 'Vacuna', 'Fuego', 'Llama Azul', 'Rookie', 1100, 3400, 1400, 2900, 2700, 1900)
-    INTO Maul.Digimon VALUES ('Palmon', 'F', 'Dato', 'Naturaleza', 'Enredadera', 'Rookie', 1000, 3300, 1300, 2800, 2600, 1800)
-    INTO Maul.Digimon VALUES ('Patamon', 'M', 'Libre', 'Viento', 'Aire Divino', 'Rookie', 1050, 3200, 1350, 2750, 2650, 1750)
-    INTO Maul.Digimon VALUES ('Gatomon', 'F', 'Vacuna', 'Luz', 'Garra Infernal', 'Champion', 1300, 4000, 1800, 3500, 3300, 2500)
-    INTO Maul.Digimon VALUES ('Devimon', 'M', 'Virus', 'Oscuridad', 'Colmillo Helado', 'Champion', 1400, 4200, 1900, 3600, 3400, 2600)
-    INTO Maul.Digimon VALUES ('Garurumon', 'M', 'Dato', 'Viento', 'Misil Giga', 'Champion', 1450, 4300, 2000, 3700, 3500, 2700)
-    INTO Maul.Digimon VALUES ('MetalGreymon', 'M', 'Virus', 'Fuego', 'Rugido Letal', 'Ultra', 1500, 5000, 2500, 4500, 4300, 3500)
-    INTO Maul.Digimon VALUES ('SaberLeomon', 'M', 'Vacuna', 'Tierra', 'Disparo Oscuro', 'Mega', 1600, 5500, 2700, 4800, 4600, 3700)
-SELECT 1 FROM dual;
-
-
 -- Inserts para Naturaleza
 INSERT ALL
     INTO Maul.Naturaleza VALUES ('Vacuna', 'Digimon protectores con afinidad a la justicia', 'Ventaja contra Virus', 'Debilidad contra Dato')
@@ -60,6 +47,8 @@ INSERT ALL
     INTO Maul.Naturaleza VALUES ('Variable', 'Digimon con atributos cambiantes', 'Versatilidad en combate', 'Inconsistencia estratégica')
     INTO Maul.Naturaleza VALUES ('Desconocido', 'Naturaleza no clasificable', 'Efectos impredecibles', 'Falta de sinergia')
 SELECT 1 FROM dual;
+
+SELECT * FROM Maul.Naturaleza;
 
 -- Inserts para Habilidad_Esp
 INSERT ALL
@@ -75,6 +64,8 @@ INSERT ALL
     INTO Maul.Habilidad_Esp VALUES ('Disparo Oscuro', 'Proyectil de energía oscura')
 SELECT 1 FROM dual;
 
+SELECT * FROM Mual.Habilidad_Esp;
+
 -- Inserts para Tipo_Digimon
 INSERT ALL
     INTO Maul.Tipo_Digimon VALUES ('Agua', 'Digimon con afinidad por el agua y el hielo')
@@ -86,6 +77,22 @@ INSERT ALL
     INTO Maul.Tipo_Digimon VALUES ('Oscuridad', 'Digimon malignos con habilidades destructivas')
 SELECT 1 FROM dual;
 
+SELECT * FROM Maul.Tipo_Digimon;
+
+INSERT ALL
+    INTO Maul.Digimon VALUES ('Agumon', 'M', 'Vacuna', 'Fuego', 'Llamarada', 'Rookie', 1200, 3500, 1500, 3000, 2800, 2000)
+    INTO Maul.Digimon VALUES ('Gabumon', 'M', 'Vacuna', 'Fuego', 'Llama Azul', 'Rookie', 1100, 3400, 1400, 2900, 2700, 1900)
+    INTO Maul.Digimon VALUES ('Palmon', 'F', 'Dato', 'Naturaleza', 'Enredadera', 'Rookie', 1000, 3300, 1300, 2800, 2600, 1800)
+    INTO Maul.Digimon VALUES ('Patamon', 'M', 'Libre', 'Viento', 'Aire Divino', 'Rookie', 1050, 3200, 1350, 2750, 2650, 1750)
+    INTO Maul.Digimon VALUES ('Gatomon', 'F', 'Vacuna', 'Luz', 'Garra Infernal', 'Champion', 1300, 4000, 1800, 3500, 3300, 2500)
+    INTO Maul.Digimon VALUES ('Devimon', 'M', 'Virus', 'Oscuridad', 'Colmillo Helado', 'Champion', 1400, 4200, 1900, 3600, 3400, 2600)
+    INTO Maul.Digimon VALUES ('Garurumon', 'M', 'Dato', 'Viento', 'Misil Giga', 'Champion', 1450, 4300, 2000, 3700, 3500, 2700)
+    INTO Maul.Digimon VALUES ('MetalGreymon', 'M', 'Virus', 'Fuego', 'Rugido Letal', 'Ultra', 1500, 5000, 2500, 4500, 4300, 3500)
+    INTO Maul.Digimon VALUES ('SaberLeomon', 'M', 'Vacuna', 'Tierra', 'Disparo Oscuro', 'Mega', 1600, 5500, 2700, 4800, 4600, 3700)
+SELECT 1 FROM dual;
+
+SELECT * FROM Maul.Digimon;
+
 -- Suponiendo que existen entrenadores con id_entrenador del 1 al 5
 
 INSERT ALL
@@ -95,7 +102,9 @@ INSERT ALL
     INTO Maul.Entrena VALUES (001, 'Patamon', NULL)
     INTO Maul.Entrena VALUES (001, 'Gatomon', NULL)
     INTO Maul.Entrena VALUES (001, 'Devimon', NULL)
-    INTO Maul.Entrena VALUES (4, 'MetalGreymon', '03/03/2025')
-    INTO Maul.Entrena VALUES (5, 'SaberLeomon', '08/03/2025')
-    INTO Maul.Entrena VALUES (5, 'Beelzemon', '10/03/2025')
+    INTO Maul.Entrena VALUES (004, 'MetalGreymon', '03/03/2025')
+    INTO Maul.Entrena VALUES (005, 'SaberLeomon', '08/03/2025')
+    INTO Maul.Entrena VALUES (005, 'Beelzemon', '10/03/2025')
 SELECT 1 FROM dual;
+
+SELECT * FROM Maul.Entrena;

@@ -1,8 +1,8 @@
 /**************** CREACION DEL REPOSITORIO ***************/
 
-CREATE TABLESPACE repo_tablas DATAFILE 'df_tablas_digi.DFB' SIZE 500M;
-CREATE TABLESPACE repo_indices DATAFILE 'df_indices_digi.DFB' SIZE 500M;
-CREATE TABLESPACE usuarios_esquema DATAFILE 'df_usuarios_esq.DFB' SIZE 500M;
+CREATE TABLESPACE repo_tablas DATAFILE 'df_tablas_digi.DFB' SIZE 500M AUTOEXTEND ON;
+CREATE TABLESPACE repo_indices DATAFILE 'df_indices_digi.DFB' SIZE 500M AUTOEXTEND ON;
+CREATE TABLESPACE usuarios_esquema DATAFILE 'df_usuarios_esq.DFB' SIZE 500M AUTOEXTEND ON;
 
 --DROP TABLESPACE repo_tablas INCLUDING CONTENTS AND DATAFILES;
 --DROP TABLESPACE repo_indices INCLUDING CONTENTS AND DATAFILES;
@@ -101,6 +101,7 @@ CREATE UNIQUE INDEX Maul.ind_entrenador_indx ON Maul.Entrenador(id_entrenador) T
 CREATE INDEX Maul.ind_nombre_entrenador ON Maul.Entrenador(nombre) TABLESPACE repo_indices;
 ALTER TABLE Maul.Entrenador ADD CONSTRAINT id_entrenador_PK PRIMARY KEY (id_entrenador);
 
+
 CREATE TABLE Maul.Naturaleza(
     nombre VARCHAR(30) NOT NULL CHECK (nombre IN ('Vacuna', 'Dato', 'Virus', 'Libre', 'Variable', 'Desconocido')),
     descripcion VARCHAR2(50),
@@ -120,6 +121,7 @@ CREATE TABLE Maul.Habilidad_Esp(
 CREATE UNIQUE INDEX Maul.nombre_HabilidadEsp_indx ON Maul.Habilidad_Esp (nombre) TABLESPACE repo_indices;
 ALTER TABLE Maul.Habilidad_Esp ADD CONSTRAINT nombre_habilidadEsp_pk PRIMARY KEY (nombre);
 
+
 CREATE TABLE Maul.Tipo_Digimon(
     nombre VARCHAR2(20),
     descripcion VARCHAR2(50)
@@ -127,6 +129,7 @@ CREATE TABLE Maul.Tipo_Digimon(
 
 CREATE UNIQUE INDEX Maul.nombre_TipoDigimon_indx ON Maul.Tipo_Digimon (nombre) TABLESPACE repo_indices;
 ALTER TABLE Maul.Tipo_Digimon ADD CONSTRAINT nombre_tipoDigimon_pk PRIMARY KEY (nombre);
+
 
 CREATE TABLE Maul.Digimon(
     nombre VARCHAR2(30) NOT NULL,
@@ -149,6 +152,7 @@ CREATE TABLE Maul.Digimon(
 CREATE UNIQUE INDEX Maul.nombre_Digimon_indx ON Maul.Digimon (nombre) TABLESPACE repo_indices;
 ALTER TABLE Maul.Digimon ADD CONSTRAINT nombre_digimon_pk PRIMARY KEY (nombre);
 
+
 CREATE TABLE Maul.Digievoluciona(
     digimon_BASE VARCHAR2(30),
     digimon_EVO VARCHAR2(30),
@@ -160,6 +164,7 @@ CREATE TABLE Maul.Digievoluciona(
 
 ALTER TABLE Maul.Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon_BASE,digimon_EVO);
 
+
 CREATE TABLE Maul.Entrena(
     id_entrenador NUMBER(10),
     nombre_digimon VARCHAR2(30),
@@ -170,7 +175,8 @@ CREATE TABLE Maul.Entrena(
 
 ALTER TABLE Maul.Entrena ADD CONSTRAINT entrena_pk PRIMARY KEY (id_entrenador,nombre_digimon);
 
---TRIGGER--
+
+/**************** TRIGGERS ******************/
 
 -- Maximo de Digimon
 
@@ -234,8 +240,10 @@ BEGIN
 END;
 /
 
+--DROP TRIGGER trg_max_digimones;
 --DROP TRIGGER tr_entrenador_edad;
---DROP TRIGGER tr_max_digimon_entrenador;
+--DROP TRIGGER trg_verifica_entrena;
+
 
 /* DROP TABLE Ciudad;
 DROP TABLE Pais;
