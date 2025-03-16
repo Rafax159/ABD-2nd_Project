@@ -25,33 +25,6 @@ CREATE ROLE Registrador;
 CREATE ROLE Moderador;
 CREATE ROLE Administrador;
 
-GRANT INSERT, UPDATE, SELECT ON Maul.Entrenador TO Registrador; -- > Para hacer los UPDATE con WHERE
-GRANT INSERT, UPDATE, SELECT ON Maul.Digimon TO Registrador;
-
-GRANT SELECT ON Maul.Pais TO Moderador;
-GRANT SELECT ON Maul.Ciudad TO Moderador;
-GRANT SELECT ON Maul.Entrenador TO Moderador;
-GRANT SELECT ON Maul.Digimon TO Moderador;
-GRANT SELECT ON Maul.Naturaleza TO Moderador;
-GRANT SELECT ON Maul.Habilidad_Esp TO Moderador;
-GRANT SELECT ON Maul.Tipo_Digimon TO Moderador;
-GRANT SELECT ON Maul.Digievoluciona TO Moderador;
-GRANT SELECT ON Maul.Entrena TO Moderador;
-
-GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Pais TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Ciudad TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Entrenador TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Digimon TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Naturaleza TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Habilidad_Esp TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Tipo_Digimon TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Digievoluciona TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Entrena TO Administrador;
-
-GRANT CREATE SESSION, Registrador TO Revan;
-GRANT CREATE SESSION, Moderador TO Nihilus;
-GRANT CREATE SESSION, Administrador TO Vader;
-
 --DROP USER Revan;
 --DROP USER Nihilus;
 --DROP USER Vader;
@@ -174,6 +147,36 @@ CREATE TABLE Maul.Entrena(
 )TABLESPACE repo_tablas;
 
 ALTER TABLE Maul.Entrena ADD CONSTRAINT entrena_pk PRIMARY KEY (id_entrenador,nombre_digimon);
+
+
+/**************** ASIGNACION DE PRIVILEGIOS ****************/
+
+GRANT INSERT, UPDATE, SELECT ON Maul.Entrenador TO Registrador; -- > Para hacer los UPDATE con WHERE
+GRANT INSERT, UPDATE, SELECT ON Maul.Digimon TO Registrador;
+
+GRANT SELECT ON Maul.Pais TO Moderador;
+GRANT SELECT ON Maul.Ciudad TO Moderador;
+GRANT SELECT ON Maul.Entrenador TO Moderador;
+GRANT SELECT ON Maul.Digimon TO Moderador;
+GRANT SELECT ON Maul.Naturaleza TO Moderador;
+GRANT SELECT ON Maul.Habilidad_Esp TO Moderador;
+GRANT SELECT ON Maul.Tipo_Digimon TO Moderador;
+GRANT SELECT ON Maul.Digievoluciona TO Moderador;
+GRANT SELECT ON Maul.Entrena TO Moderador;
+
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Pais TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Ciudad TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Entrenador TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Digimon TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Naturaleza TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Habilidad_Esp TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Tipo_Digimon TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Digievoluciona TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Entrena TO Administrador;
+
+GRANT CREATE SESSION, Registrador TO Revan;
+GRANT CREATE SESSION, Moderador TO Nihilus;
+GRANT CREATE SESSION, Administrador TO Vader;
 
 
 /**************** TRIGGERS ******************/
