@@ -15,33 +15,37 @@ ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
 CREATE USER Revan IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema;
 CREATE USER Nihilus IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema;
 CREATE USER Vader IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema;
+CREATE USER Maul IDENTIFIED BY 12345 DEFAULT TABLESPACE usuarios_esquema; -- > Este usuario es donde se apuntara todo el esquema de la BD
+
+ALTER USER Maul QUOTA UNLIMITED ON repo_tablas;
+ALTER USER Maul QUOTA UNLIMITED ON repo_indices;
 
 CREATE ROLE Registrador;
 CREATE ROLE Moderador;
 CREATE ROLE Administrador;
 
-GRANT INSERT, UPDATE ON Entrenador TO Registrador;
-GRANT INSERT, UPDATE ON Digimon TO Registrador;
+GRANT INSERT, UPDATE, SELECT ON Maul.Entrenador TO Registrador;
+GRANT INSERT, UPDATE, SELECT ON Maul.Digimon TO Registrador;
 
-GRANT SELECT ON Pais TO Moderador;
-GRANT SELECT ON Ciudad TO Moderador;
-GRANT SELECT ON Entrenador TO Moderador;
-GRANT SELECT ON Digimon TO Moderador;
-GRANT SELECT ON Naturaleza TO Moderador;
-GRANT SELECT ON Habilidad_Esp TO Moderador;
-GRANT SELECT ON Tipo_Digimon TO Moderador;
-GRANT SELECT ON Digievoluciona TO Moderador;
-GRANT SELECT ON Entrena TO Moderador;
+GRANT SELECT ON Maul.Pais TO Moderador;
+GRANT SELECT ON Maul.Ciudad TO Moderador;
+GRANT SELECT ON Maul.Entrenador TO Moderador;
+GRANT SELECT ON Maul.Digimon TO Moderador;
+GRANT SELECT ON Maul.Naturaleza TO Moderador;
+GRANT SELECT ON Maul.Habilidad_Esp TO Moderador;
+GRANT SELECT ON Maul.Tipo_Digimon TO Moderador;
+GRANT SELECT ON Maul.Digievoluciona TO Moderador;
+GRANT SELECT ON Maul.Entrena TO Moderador;
 
-GRANT INSERT, UPDATE, DELETE, SELECT ON Pais TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Ciudad TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Entrenador TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Digimon TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Naturaleza TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Habilidad_Esp TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Tipo_Digimon TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Digievoluciona TO Administrador;
-GRANT INSERT, UPDATE, DELETE, SELECT ON Entrena TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Pais TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Ciudad TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Entrenador TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Digimon TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Naturaleza TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Habilidad_Esp TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Tipo_Digimon TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Digievoluciona TO Administrador;
+GRANT INSERT, UPDATE, DELETE, SELECT ON Maul.Entrena TO Administrador;
 
 GRANT CREATE SESSION, Registrador TO Revan;
 GRANT CREATE SESSION, Moderador TO Nihilus;
@@ -50,38 +54,37 @@ GRANT CREATE SESSION, Administrador TO Vader;
 --DROP USER Revan;
 --DROP USER Nihilus;
 --DROP USER Vader;
+--DROP USER Maul;
 
 --DROP ROLE Registrador;
 --DROP ROLE Moderador;
 --DROP ROLE Administrador;
 
-CONNECT SUPER_USUARIO/12345;
-
 /**************** CREACION DEL ESQUEMA ******************/
 
-CREATE TABLE Pais (
+CREATE TABLE Maul.Pais (
     nombre_ESP VARCHAR2(30) NOT NULL,
     nombre_EN VARCHAR2(30) NOT NULL,
     cod_area VARCHAR2(10) NOT NULL
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX ind_nombre_pais_indx ON Pais(nombre_ESP) TABLESPACE repo_indices;
-ALTER TABLE Pais ADD CONSTRAINT nombre_pais_PK PRIMARY KEY (nombre_ESP);
+CREATE UNIQUE INDEX Maul.ind_nombre_pais_indx ON Maul.Pais(nombre_ESP) TABLESPACE repo_indices;
+ALTER TABLE Maul.Pais ADD CONSTRAINT nombre_pais_PK PRIMARY KEY (nombre_ESP);
 
 
-CREATE TABLE Ciudad (
+CREATE TABLE Maul.Ciudad (
     nombre_ESP VARCHAR2(30) NOT NULL,
     nombre_EN VARCHAR2(30) NOT NULL,
     codigo_postal VARCHAR2(10) NOT NULL,
     pais VARCHAR2(30) NOT NULL,
-    CONSTRAINT pais_ciudad_FK FOREIGN KEY (pais) REFERENCES Pais(nombre_ESP)
+    CONSTRAINT pais_ciudad_FK FOREIGN KEY (pais) REFERENCES Maul.Pais(nombre_ESP)
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX ind_nombre_ciudad_indx ON Ciudad(nombre_ESP) TABLESPACE repo_indices;
-ALTER TABLE Ciudad ADD CONSTRAINT nombre_ciudad_PK PRIMARY KEY (nombre_ESP);
+CREATE UNIQUE INDEX Maul.ind_nombre_ciudad_indx ON Maul.Ciudad(nombre_ESP) TABLESPACE repo_indices;
+ALTER TABLE Maul.Ciudad ADD CONSTRAINT nombre_ciudad_PK PRIMARY KEY (nombre_ESP);
 
 
-CREATE TABLE Entrenador (
+CREATE TABLE Maul.Entrenador (
     id_entrenador NUMBER(10) NOT NULL,
     nombre VARCHAR2(25) NOT NULL,
     apellido VARCHAR2(25) NOT NULL,
@@ -90,15 +93,15 @@ CREATE TABLE Entrenador (
     sexo VARCHAR2(1) NOT NULL CHECK (sexo IN ('M', 'F')),
     fecha_nacimiento DATE NOT NULL,
     ciudad_origen VARCHAR2(20) NOT NULL,
-    CONSTRAINT ciudad_origen_FK FOREIGN KEY (ciudad_origen) REFERENCES Ciudad(nombre_ESP)
+    CONSTRAINT ciudad_origen_FK FOREIGN KEY (ciudad_origen) REFERENCES Maul.Ciudad(nombre_ESP)
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX ind_entrenador_indx ON Entrenador(id_entrenador) TABLESPACE repo_indices;
-CREATE INDEX ind_nombre_entrenador ON Entrenador(nombre) TABLESPACE repo_indices;
-ALTER TABLE Entrenador ADD CONSTRAINT id_entrenador_PK PRIMARY KEY (id_entrenador);
+CREATE UNIQUE INDEX Maul.ind_entrenador_indx ON Maul.Entrenador(id_entrenador) TABLESPACE repo_indices;
+CREATE INDEX Maul.ind_nombre_entrenador ON Maul.Entrenador(nombre) TABLESPACE repo_indices;
+ALTER TABLE Maul.Entrenador ADD CONSTRAINT id_entrenador_PK PRIMARY KEY (id_entrenador);
 
 
-CREATE TABLE Digimon(
+CREATE TABLE Maul.Digimon(
     nombre VARCHAR2(30) NOT NULL,
     genero VARCHAR2(1) NOT NULL CHECK (genero='M' OR genero='F'),
     naturaleza VARCHAR2(20) NOT NULL CHECK (naturaleza IN ('Vacuna', 'Dato', 'Virus', 'Libre', 'Variable', 'Desconocido')),
@@ -111,76 +114,76 @@ CREATE TABLE Digimon(
     ataque NUMBER(4) NOT NULL CHECK (ataque>=0 AND ataque<=9999),
     ataque_especial NUMBER(4) NOT NULL CHECK (ataque_especial>=0 AND ataque_especial<=9999),
     defensa_especial NUMBER(4) NOT NULL CHECK (defensa_especial>=0 AND defensa_especial<=9999),
-    CONSTRAINT Digimon_Naturaleza_fk FOREIGN KEY (naturaleza) REFERENCES Naturaleza(nombre),
-    CONSTRAINT Digimon_tipo_fk FOREIGN KEY (tipo) REFERENCES Tipo_Digimon(nombre),
-    CONSTRAINT Digimon_Habilidad_fk FOREIGN KEY (habilidad_especial) REFERENCES Habilidad_Esp(nombre)
+    CONSTRAINT Digimon_Naturaleza_fk FOREIGN KEY (naturaleza) REFERENCES Maul.Naturaleza(nombre),
+    CONSTRAINT Digimon_tipo_fk FOREIGN KEY (tipo) REFERENCES Maul.Tipo_Digimon(nombre),
+    CONSTRAINT Digimon_Habilidad_fk FOREIGN KEY (habilidad_especial) REFERENCES Maul.Habilidad_Esp(nombre)
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX nombre_Digimon_indx ON Digimon (nombre) TABLESPACE repo_indices;
-ALTER TABLE Digimon ADD CONSTRAINT nombre_digimon_pk PRIMARY KEY (nombre);
+CREATE UNIQUE INDEX Maul.nombre_Digimon_indx ON Maul.Digimon (nombre) TABLESPACE repo_indices;
+ALTER TABLE Maul.Digimon ADD CONSTRAINT nombre_digimon_pk PRIMARY KEY (nombre);
 
 
-CREATE TABLE Naturaleza(
+CREATE TABLE Maul.Naturaleza(
     nombre VARCHAR(30) NOT NULL CHECK (nombre IN ('Vacuna', 'Dato', 'Virus', 'Libre', 'Variable', 'Desconocido')),
     descripcion VARCHAR2(50),
     beneficio VARCHAR2(20),
     desventaja VARCHAR2(20)
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX nombre_Naturaleza_indx ON Naturaleza (nombre) TABLESPACE repo_indices;
-ALTER TABLE Naturaleza ADD CONSTRAINT nombre_naturaleza_pk PRIMARY KEY (nombre);
+CREATE UNIQUE INDEX Maul.nombre_Naturaleza_indx ON Maul.Naturaleza (nombre) TABLESPACE repo_indices;
+ALTER TABLE Maul.Naturaleza ADD CONSTRAINT nombre_naturaleza_pk PRIMARY KEY (nombre);
 
 
-CREATE TABLE Habilidad_Esp(
+CREATE TABLE Maul.Habilidad_Esp(
     nombre VARCHAR2(20),
     descripcion VARCHAR2(50)
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX nombre_HabilidadEsp_indx ON Habilidad_Esp (nombre) TABLESPACE repo_indices;
-ALTER TABLE Habilidad_Esp ADD CONSTRAINT nombre_habilidadEsp_pk PRIMARY KEY (nombre);
+CREATE UNIQUE INDEX Maul.nombre_HabilidadEsp_indx ON Maul.Habilidad_Esp (nombre) TABLESPACE repo_indices;
+ALTER TABLE Maul.Habilidad_Esp ADD CONSTRAINT nombre_habilidadEsp_pk PRIMARY KEY (nombre);
 
 
-CREATE TABLE Tipo_Digimon(
+CREATE TABLE Maul.Tipo_Digimon(
     nombre VARCHAR2(20),
     descripcion VARCHAR2(50)
 )TABLESPACE repo_tablas;
 
-CREATE UNIQUE INDEX nombre_TipoDigimon_indx ON Tipo_Digimon (nombre) TABLESPACE repo_indices;
-ALTER TABLE Tipo_Digimon ADD CONSTRAINT nombre_tipoDigimon_pk PRIMARY KEY (nombre);
+CREATE UNIQUE INDEX Maul.nombre_TipoDigimon_indx ON Maul.Tipo_Digimon (nombre) TABLESPACE repo_indices;
+ALTER TABLE Maul.Tipo_Digimon ADD CONSTRAINT nombre_tipoDigimon_pk PRIMARY KEY (nombre);
 
 
-CREATE TABLE Digievoluciona(
+CREATE TABLE Maul.Digievoluciona(
     digimon_BASE VARCHAR2(30),
     digimon_EVO VARCHAR2(30),
     tipo_Evo VARCHAR2(30),
-    CONSTRAINT digievoluciona_base_fk FOREIGN KEY (digimon_BASE) REFERENCES Digimon (nombre),
-    CONSTRAINT digievoluciona_evo_fk FOREIGN KEY (digimon_EVO) REFERENCES Digimon (nombre),
+    CONSTRAINT digievoluciona_base_fk FOREIGN KEY (digimon_BASE) REFERENCES Maul.Digimon (nombre),
+    CONSTRAINT digievoluciona_evo_fk FOREIGN KEY (digimon_EVO) REFERENCES Maul.Digimon (nombre),
     CONSTRAINT unq_evo_digimon UNIQUE (digimon_BASE, tipo_Evo)
 )TABLESPACE repo_tablas;
 
-ALTER TABLE Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon_BASE,digimon_EVO);
+ALTER TABLE Maul.Digievoluciona ADD CONSTRAINT digievoluciona_pk PRIMARY KEY (digimon_BASE,digimon_EVO);
 
-CREATE TABLE Entrena(
+CREATE TABLE Maul.Entrena(
     id_entrenador NUMBER(10),
     nombre_digimon VARCHAR2(30),
     fecha_liberacion DATE,
-    CONSTRAINT entrena_idEnt_fk FOREIGN KEY (id_entrenador) REFERENCES Entrenador (id_entrenador),
-    CONSTRAINT entrena_nombreDigi_fk FOREIGN KEY (nombre_digimon) REFERENCES Digimon (nombre)
+    CONSTRAINT entrena_idEnt_fk FOREIGN KEY (id_entrenador) REFERENCES Maul.Entrenador (id_entrenador),
+    CONSTRAINT entrena_nombreDigi_fk FOREIGN KEY (nombre_digimon) REFERENCES Maul.Digimon (nombre)
 )TABLESPACE repo_tablas;
 
-ALTER TABLE Entrena ADD CONSTRAINT entrena_pk PRIMARY KEY (id_entrenador,nombre_digimon);
+ALTER TABLE Maul.Entrena ADD CONSTRAINT entrena_pk PRIMARY KEY (id_entrenador,nombre_digimon);
 
 --TRIGGER--
 
 CREATE OR REPLACE TRIGGER trg_max_digimones
-BEFORE INSERT OR UPDATE ON Entrena
+BEFORE INSERT OR UPDATE ON Maul.Entrena
 FOR EACH ROW
 DECLARE
     v_count NUMBER;
 BEGIN
     SELECT COUNT(*)
     INTO v_count
-    FROM Entrena
+    FROM Maul.Entrena
     WHERE id_entrenador = :NEW.id_entrenador
           AND fecha_liberacion IS NULL;
 
@@ -193,7 +196,7 @@ END;
 /
 
 CREATE OR REPLACE TRIGGER tr_entrenador_edad
-BEFORE INSERT ON Entrenador
+BEFORE INSERT ON Maul.Entrenador
 FOR EACH ROW
 BEGIN
     IF (EXTRACT(YEAR FROM (SYSDATE)) - EXTRACT(YEAR FROM (:NEW.fecha_nacimiento)) < 18) THEN
